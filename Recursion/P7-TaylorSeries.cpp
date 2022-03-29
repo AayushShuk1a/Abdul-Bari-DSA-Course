@@ -18,10 +18,28 @@ double e(int x, int n)
     }
 }
 
+double e2(int x, int n)
+{
+    static double sum4 = 1;
+    if (n == 0)
+    {
+        return sum4;
+    }
+    else
+    {
+        sum4 = 1 + x * sum4 / n;
+        return e2(x, n - 1);
+    }
+}
+
 int main()
 {
     int x, n;
     cin >> x >> n;
     double sum = e(x, n);
-    cout << sum;
+
+    double sum2 = e2(x, n);
+    cout
+        << sum << endl
+        << sum2;
 }
