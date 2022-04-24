@@ -21,10 +21,7 @@ public:
         A = new int(size);
         length = 0;
     }
-    ~Insert()
-    {
-        delete[] A;
-    }
+
     void InsertValue(int index, int value);
     void Display();
 };
