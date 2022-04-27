@@ -29,8 +29,48 @@ public:
         }
     }
 
+    void unions(int b[]);
     void intersection(int b[]);
 };
+
+void operations::unions(int b[])
+{
+    int i = 0, j = 0, k = 0;
+    int c[10];
+    while (i < 7 && j < 7)
+    {
+        if (A[i] < b[j])
+        {
+            c[k++] = A[i++];
+        }
+        else if (A[i] > b[j])
+        {
+            c[k++] = b[j++];
+        }
+        else if (A[i] == b[j])
+        {
+            c[k++] = A[i++];
+            j++;
+        }
+    }
+
+    while (i < 7)
+    {
+        c[k++] = A[i++];
+    }
+
+    while (j < 7)
+    {
+        c[k++] = b[j++];
+    }
+
+    cout << endl
+         << "The union between two arrays is : ";
+    for (int i = 0; i < k; i++)
+    {
+        cout << c[i] << ",";
+    }
+}
 
 void operations::intersection(int b[])
 {
@@ -84,4 +124,5 @@ int main()
     }
 
     arr.intersection(c);
+    arr.unions(c);
 }
