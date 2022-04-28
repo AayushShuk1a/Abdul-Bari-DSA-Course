@@ -30,47 +30,43 @@ public:
         }
     }
 
-    void Missing(int l, int h);
+    void Duplicates();
 };
 
-void Array::Missing(int l, int h)
+void Array::Duplicates()
 {
-    int low = l;
-    int high = h;
-    int hasharray[h] = {0};
+    int c;
+
     for (int i = 0; i < length; i++)
     {
 
-        hasharray[A[i]]++;
-    }
-
-    cout << endl
-         << "The missing elements are : ";
-
-    for (int i = l; i <= h; i++)
-    {
-        if (hasharray[i] == 0)
+        if (A[i] == A[i + 1])
         {
-            cout << i << ",";
+            c = i + 1;
+
+            while (A[i] == A[c])
+            {
+                c++;
+            }
+            cout << endl
+                 << A[i] << " occurs " << c - i << " times.";
+
+            i = c - 1;
         }
     }
 }
 
 int main()
 {
-    Array arr(5);
+    Array arr(10);
     int n;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 10; i++)
     {
         cin >> n;
         arr.fillArray(n, i);
     }
 
-    cout << "Enter Low and High respectively : ";
-    int l, h;
-    cin >> l >> h;
-
     arr.display();
 
-    arr.Missing(l, h);
+    arr.Duplicates();
 }
