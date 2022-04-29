@@ -31,9 +31,10 @@ public:
     }
 
     void Pair(int value);
+    void sortedpair(int value);
 };
 
-void Array::Pair(int value)
+void Array::Pair(int value) // Sorted or Unsorted Array time complexity O(n^2)
 {
 
     cout << endl
@@ -48,6 +49,31 @@ void Array::Pair(int value)
             {
                 cout << A[i] << " + " << A[j] << " = " << value << endl;
             }
+        }
+    }
+}
+
+void Array::sortedpair(int value)
+{
+    cout << endl
+         << "The Pairs are : " << endl;
+
+    int i = 0, j = length - 1;
+    while (i < j) // Sorted Array with time complexity O(n)
+    {
+        if (A[i] + A[j] == value)
+        {
+            cout << A[i] << " + " << A[j] << " = " << value << endl;
+            i++;
+            j--;
+        }
+        else if (A[i] + A[j] > value)
+        {
+            j--;
+        }
+        else if (A[i] + A[j] < value)
+        {
+            i++;
         }
     }
 }
@@ -68,5 +94,25 @@ int main()
          << "Enter the value : ";
     int value;
     cin >> value;
-    arr.Pair(value);
+
+    cout << endl
+         << "1.Unsorted" << endl;
+    cout << "2.Sorted" << endl;
+    int ch;
+    cin >> ch;
+
+    switch (ch)
+    {
+    case 1:
+        arr.Pair(value);
+        break;
+
+    case 2:
+        arr.sortedpair(value);
+        break;
+
+    default:
+        cout << "Enter Valid Choice";
+        break;
+    }
 }
