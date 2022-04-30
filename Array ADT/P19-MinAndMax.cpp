@@ -69,4 +69,4 @@ int main()
     arr.display();
 
     arr.MinAndMax();
-}
+}w
