@@ -61,9 +61,9 @@ void Matrix::display()
 int main()
 {
     Matrix m(3);
-    m.set(0, 0, 5);
-    m.set(1, 1, 4);
-    m.set(2, 2, 8);
+    m.set(0, 0, 9);
+    m.set(1, 1, 6);
+    m.set(2, 2, 4);
     m.display();
 
     cout << m.get(2, 2);
