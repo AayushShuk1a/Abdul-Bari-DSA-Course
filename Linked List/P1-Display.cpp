@@ -16,8 +16,24 @@ private:
 public:
     LinkedList() { first = NULL; }
     LinkedList(int A[], int n);
+
+    Node *getPointer()
+    {
+        return first;
+    }
     void display();
+    void RecursiveDisplay(Node *p);
 };
+
+void LinkedList::RecursiveDisplay(Node *p)
+{
+
+    if (p->next == NULL)
+        return;
+
+    cout << p->data << " ";
+    RecursiveDisplay(p->next);
+}
 
 LinkedList::LinkedList(int A[], int n)
 {
@@ -54,4 +70,7 @@ int main()
 
     LinkedList ill(A, 6);
     ill.display();
+    cout << endl;
+    Node *t = ill.getPointer();
+    ill.RecursiveDisplay(t);
 }

@@ -15,9 +15,21 @@ private:
 
 public:
     CountLL(int A[], int n);
+    Node *getPointer()
+    {
+        return first;
+    }
+    int countRecursively(Node *p);
 
     int count();
 };
+
+int CountLL::countRecursively(Node *p)
+{
+    if (p->next == NULL)
+        return 0;
+    return countRecursively(p->next) + 1;
+}
 
 CountLL::CountLL(int A[], int n)
 {
@@ -55,5 +67,8 @@ int main()
     int A[] = {5, 10, 15, 2, 3, 42, 4};
     CountLL CL(A, 7);
 
-    cout << CL.count();
+    cout << CL.count() << endl;
+    Node *t = CL.getPointer();
+
+    cout << CL.countRecursively(t);
 }
