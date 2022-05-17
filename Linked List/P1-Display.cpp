@@ -25,8 +25,8 @@ public:
     void RecursiveDisplay(Node *p);
 };
 
-void LinkedList::RecursiveDisplay(Node *p)
-{
+void LinkedList::RecursiveDisplay(Node *p)    //Time Complexity for both function is O(n) but space complexity for 
+{                                             //Recursive=O(n) and Display=O(1) as recursion uses stack
 
     if (p->next == NULL)
         return;
