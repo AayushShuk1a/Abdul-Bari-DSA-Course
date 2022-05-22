@@ -84,6 +84,8 @@ int main()
     Sa.display();
 
     Sa.insert(1);
+    Sa.insert(34);
+    Sa.insert(21);
 
     cout << endl
          << "After Insert " << endl;
