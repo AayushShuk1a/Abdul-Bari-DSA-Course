@@ -1,0 +1,1 @@
+del.deleteNode(0);
