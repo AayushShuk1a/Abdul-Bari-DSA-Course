@@ -16,9 +16,27 @@ private:
 public:
     ReverseLL(int A[], int n);
     void display();
-    void RevUsingArray(int n); // Reversing Linked List using Array
-    void RevUsingPointer();    // Best Method using 3 pointer which slides(is called Slider Pointer)
+    void RevUsingArray(int n);                // Reversing Linked List using Array
+    void RevUsingPointer();                   // Best Method using 3 pointer which slides(is called Slider Pointer)
+    void RevUsingRecursion(Node *p, Node *q); // Reverse Using Recursion
+    Node *getPointer()
+    {
+        return first;
+    }
 };
+
+void ReverseLL::RevUsingRecursion(Node *p, Node *q)
+{
+    if (p)
+    {
+        RevUsingRecursion(p->next, p);
+        p->next = q;
+    }
+    else
+    {
+        first = q;
+    }
+}
 
 void ReverseLL::RevUsingPointer()
 {
@@ -100,4 +118,11 @@ int main()
          << "after Reverse" << endl;
     rev.RevUsingPointer();
     rev.display();
+
+    // cout << endl
+    //      << "after Reverse again" << endl;     //Using Recursion
+    // Node *t = rev.getPointer();
+
+    // rev.RevUsingRecursion(t, NULL);
+    // rev.display();
 }
