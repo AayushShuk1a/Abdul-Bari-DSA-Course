@@ -63,7 +63,7 @@ int main()
     Node *first = CL.getPointer();
 
     Node *t1 = first->next;
-    Node *t2 = first->next->next->next;
+    Node *t2 = first->next->next->next; // turning list into loop
     t2->next = t1;
 
     int value = CL.checkloop();
