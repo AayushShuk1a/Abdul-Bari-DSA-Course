@@ -16,7 +16,7 @@ private:
 public:
     ConcatenateLL(int A[], int n);
     void display();
-    void Concatenate(Node *first, Node *second);
+    void Concatenate(Node *firstArray, Node *secondArray);
     Node *getPointer() { return first; };
 };
 
@@ -47,15 +47,15 @@ void ConcatenateLL::display()
     }
 }
 
-void ConcatenateLL::Concatenate(Node *first, Node *second)
+void ConcatenateLL::Concatenate(Node *firstArray, Node *secondArray)
 {
-    Node *p = first;
+    Node *p = firstArray;
     while (p->next != NULL)
     {
         p = p->next;
     }
 
-    p->next = second;
+    p->next = secondArray;
 }
 
 int main()
