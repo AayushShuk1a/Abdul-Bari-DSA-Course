@@ -14,12 +14,31 @@ private:
     Node *head;
 
 public:
+    Circular() { head = NULL; };
     Circular(int A[], int n);
     void display();
     void insert(int index, int data);
     void Delete();
     bool checkloop();
+    int length();
 };
+
+int Circular::length()
+{
+    Node *p = head;
+    int c = 1;
+    if (p)
+    {
+
+        do
+        {
+            c++;
+            p = p->next;
+
+        } while (p != head);
+    }
+    return c;
+}
 
 Circular::Circular(int A[], int n)
 {
@@ -61,8 +80,9 @@ bool Circular::checkloop()
         q = q ? q->next : q;
     } while (p && q && p != q);
 
-    if (p == q)
+    if (p && q && p == q)
     {
+
         return true;
     }
 
@@ -81,15 +101,62 @@ void Circular::display()
 
 void Circular::insert(int index, int data)
 {
-    Node *p, *t;
+    Node *p = head, *t;
+    t = new Node;
+    t->data = data;
+
+    if (index > length() || index < 0)
+    {
+        cout << "Enter the value at " << length() << " not at " << index << endl;
+        return;
+    }
+
+    if (index == 1)
+    {
+        t->next = head;
+        if (p == NULL)
+        {
+            head = t;
+            head->next = head;
+        }
+        else
+        {
+
+            do
+            {
+                p = p->next;
+
+            } while (p->next != head);
+            p->next = t;
+        }
+    }
+    else
+    {
+        for (int i = 2; i < index; i++)
+        {
+            p = p->next;
+        }
+        t->next = p->next;
+        p->next = t;
+    }
 }
 
 int main()
 {
-    int A[] = {5, 2, 555, 21, 34, 21, 44, 53};
-    Circular circ(A, sizeof(A) / sizeof(A[0]));
+    // int A[] = {};
+    Circular circ;
 
-    cout << circ.checkloop();
+    // cout << circ.length() << endl;
+    circ.insert(1, 32);
+    circ.insert(2, 13);
+    circ.insert(3, 45);
+
+    circ.insert(4, 77);
+    circ.insert(5, 97);
+    circ.insert(6, 88);
+    circ.insert(7, 100);
+
+    cout << circ.checkloop() << endl;
 
     circ.display();
 }

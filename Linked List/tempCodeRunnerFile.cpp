@@ -1,1 +1,1 @@
-last->next = head;
+circ.insert(4, 77);
