@@ -18,10 +18,38 @@ public:
     Circular(int A[], int n);
     void display();
     void insert(int index, int data);
-    void Delete();
+    void Delete(int index);
     bool checkloop();
     int length();
 };
+
+void Circular::Delete(int index)
+{
+    Node *p = head;
+    Node *q;
+    if (index == 1)
+    {
+        do
+        {
+
+            p = p->next;
+        } while (p->next != head);
+
+        p->next = head->next;
+        delete head;
+        head = p->next;
+    }
+    else
+    {
+        for (int i = 2; i < index; i++)
+        {
+            p = p->next;
+        }
+        q = p->next;
+        p->next = q->next;
+        delete q;
+    }
+}
 
 int Circular::length()
 {
@@ -155,6 +183,10 @@ int main()
     circ.insert(5, 97);
     circ.insert(6, 88);
     circ.insert(7, 100);
+
+    circ.display();
+    cout << endl;
+    circ.Delete(3);
 
     cout << circ.checkloop() << endl;
 
