@@ -79,7 +79,7 @@ int main()
     cout << "Before Inserting : ";
     insert.Display();
 
-    insert.Insert(1, 79);
+    insert.Insert(8, 79);
 
     cout << endl
          << "After Inserting : ";

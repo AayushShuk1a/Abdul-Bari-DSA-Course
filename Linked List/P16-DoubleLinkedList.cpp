@@ -42,12 +42,27 @@ DoubleLL::DoubleLL(int A[], int n)
 void DoubleLL::Insert(int index, int data)
 {
     Node *p = first, *t;
+    t = new Node;
     t->data = data;
     if (index == 1)
     {
         t->prev = NULL;
         t->next = first;
+        first->prev = t;
         first = t;
+    }
+    else
+    {
+        for (int i = 2; i < index; i++)
+        {
+            p = p->next;
+        }
+
+        t->prev = p;
+        t->next = p->next;
+        if (p->next)
+            p->next->prev = t;
+        p->next = t;
     }
 }
 
@@ -66,5 +81,11 @@ int main()
     int A[] = {1, 5, 7, 10, 15, 18, 21};
 
     DoubleLL doub(A, sizeof(A) / sizeof(A[0]));
+    doub.Display();
+    doub.Insert(8, 36);
+
+    cout << endl
+         << "After Insert " << endl;
+
     doub.Display();
 }
