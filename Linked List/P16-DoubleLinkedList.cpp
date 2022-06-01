@@ -18,7 +18,34 @@ public:
     DoubleLL(int A[], int n);
     void Display();
     void Insert(int index, int data);
+    void Delete(int index);
 };
+
+void DoubleLL::Delete(int index)
+{
+    Node *p = first;
+    if (index == 0)
+    {
+        if (p->next)
+        {
+            first = p->next;
+            first->prev = NULL;
+            delete p;
+        }
+    }
+    else
+    {
+        for (int i = 1; i < index; i++)
+        {
+            p = p->next;
+        }
+        p->prev->next = p->next;
+        if (p->next)
+            p->next->prev = p->prev;
+
+        delete p;
+    }
+}
 
 DoubleLL::DoubleLL(int A[], int n)
 {
@@ -83,9 +110,10 @@ int main()
     DoubleLL doub(A, sizeof(A) / sizeof(A[0]));
     doub.Display();
     doub.Insert(8, 36);
+    doub.Delete(7);
 
     cout << endl
-         << "After Insert " << endl;
+         << "After Insert and Delete " << endl;
 
     doub.Display();
 }
