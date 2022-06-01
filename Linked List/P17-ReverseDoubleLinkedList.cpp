@@ -54,15 +54,15 @@ void ReverseDL::Reverse()
     Node *p = first, *temp;
     while (p != NULL)
     {
-        temp = p->next;
-        p->next = p->prev;
-        p->prev = temp;
-        p = p->prev;
         if (p && p->next == NULL)
         {
 
             first = p;
         }
+        temp = p->next;
+        p->next = p->prev;
+        p->prev = temp;
+        p = p->prev;
     }
 }
 
