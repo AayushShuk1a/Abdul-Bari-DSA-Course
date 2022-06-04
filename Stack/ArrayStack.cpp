@@ -14,7 +14,53 @@ public:
     void Display();
     void push(int value);
     int pop();
+    bool isEmpty();
+    bool isfull();
+    int peek(int pos);
+    int StackTop();
 };
+
+int ArrayStack::StackTop()
+{
+    if (top == -1)
+        return -1;
+    else
+        return A[top];
+}
+
+int ArrayStack::peek(int pos)
+{
+    int x = -1;
+    if (top - pos + 1 < 0 || top - pos + 1 > size - 1)
+    {
+        cout << "Invalid Index";
+    }
+    else
+    {
+        x = A[top - pos + 1]; // Formuala to find position in stack
+    }
+    return x;
+}
+
+bool ArrayStack::isEmpty()
+{
+    if (top == -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool ArrayStack::isfull()
+{
+    if (top == size - 1)
+        return true;
+    else
+        return false;
+}
 
 ArrayStack::~ArrayStack()
 {
@@ -38,7 +84,7 @@ void ArrayStack::Display()
 
 void ArrayStack::push(int value)
 {
-    if (top == size - 1)
+    if (isfull())
     {
         cout << "Stack Overflowed" << endl;
     }
@@ -52,7 +98,7 @@ void ArrayStack::push(int value)
 int ArrayStack::pop()
 {
     int x = -1;
-    if (top == -1)
+    if (isEmpty())
     {
         cout << "Stack Underdflowed" << endl;
     }
@@ -78,6 +124,7 @@ int main()
     stck.push(40);
     stck.push(50);
     stck.pop();
+    cout << "Peek Value is " << stck.peek(2) << endl;
 
     stck.Display();
 }
