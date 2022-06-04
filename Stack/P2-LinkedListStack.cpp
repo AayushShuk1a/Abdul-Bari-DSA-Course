@@ -21,7 +21,18 @@ public:
     bool isFull();
     bool isEmpty();
     int StackTop();
+    int peek(int pos);
 };
+
+int LinkedListStack::peek(int pos)
+{
+    Node *p = top;
+    for (int i = 0; i < pos - 1; i++)
+    {
+        p = p->next;
+    }
+    return p->data;
+}
 
 bool LinkedListStack::isFull()
 {
@@ -103,4 +114,7 @@ int main()
 
     cout << endl
          << LLS.StackTop();
+
+    cout << endl
+         << LLS.peek(3);
 }
