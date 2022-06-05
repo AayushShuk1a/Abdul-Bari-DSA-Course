@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stack>
-#include <cstdlib>
 using namespace std;
 
 bool PranthesisMatching(string str)
@@ -15,7 +14,7 @@ bool PranthesisMatching(string str)
         }
         else if (str[i] == '}' || str[i] == ']' || str[i] == ')')
         {
-            if (s.empty())
+            if (s.empty()) // if the first value is empty
             {
                 return false;
             }
@@ -44,7 +43,7 @@ int main()
 {
     cout << "Enter String : ";
     string str;
-    getline(cin, str);
+    getline(cin, str); // Sample Input : [{(a+b)-(a-b)}]
     if (PranthesisMatching(str))
     {
         cout << "Balanced";
