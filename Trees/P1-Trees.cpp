@@ -18,7 +18,19 @@ private:
 public:
     Tree() { root = NULL; }
     void createTree();
+    void preOrder(Node *p);
+    Node *getRoot() { return root; }
 };
+
+void Tree::preOrder(Node *p)
+{
+    if (p)
+    {
+        cout << p->data << " ";
+        preOrder(p->Lchild);
+        preOrder(p->Rchild);
+    }
+}
 
 void Tree::createTree()
 {
@@ -36,7 +48,7 @@ void Tree::createTree()
     {
         p = q.front();
         q.pop();
-        cout << "Enter Left Child";
+        cout << "Enter Left Child for " << p->data;
         cin >> x;
         if (x != -1)
         {
@@ -48,7 +60,7 @@ void Tree::createTree()
             q.emplace(t);
         }
 
-        cout << "Enter Right Child";
+        cout << "Enter Right Child for " << p->data;
         cin >> x;
         if (x != -1)
         {
@@ -60,4 +72,13 @@ void Tree::createTree()
             q.emplace(t);
         }
     }
+}
+
+int main()
+{
+    Tree t;
+    t.createTree();
+
+    Node *p = t.getRoot();
+    t.preOrder(p);
 }
