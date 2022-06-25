@@ -19,8 +19,19 @@ public:
     Tree() { root = NULL; }
     void createTree();
     void preOrder(Node *p);
+    void InOrder(Node *p);
     Node *getRoot() { return root; }
 };
+
+void Tree::InOrder(Node *p)
+{
+    if (p)
+    {
+        InOrder(p->Lchild);
+        cout << p->data << " ";
+        InOrder(p->Rchild);
+    }
+}
 
 void Tree::preOrder(Node *p)
 {
@@ -80,5 +91,12 @@ int main()
     t.createTree();
 
     Node *p = t.getRoot();
+
+    cout << "PreOrder" << endl;
     t.preOrder(p);
+
+    cout << endl
+         << "InOrder" << endl;
+
+    t.InOrder(p);
 }
