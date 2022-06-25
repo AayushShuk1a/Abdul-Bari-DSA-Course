@@ -20,8 +20,19 @@ public:
     void createTree();
     void preOrder(Node *p);
     void InOrder(Node *p);
+    void PostOrder(Node *p);
     Node *getRoot() { return root; }
 };
+
+void Tree::PostOrder(Node *p)
+{
+    if (p)
+    {
+        PostOrder(p->Lchild);
+        PostOrder(p->Rchild);
+        cout << p->data << " ";
+    }
+}
 
 void Tree::InOrder(Node *p)
 {
@@ -99,4 +110,8 @@ int main()
          << "InOrder" << endl;
 
     t.InOrder(p);
+
+    cout << endl
+         << "PostOrder" << endl;
+    t.PostOrder(p);
 }
