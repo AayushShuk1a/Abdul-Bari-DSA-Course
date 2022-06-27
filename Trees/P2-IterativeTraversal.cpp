@@ -21,8 +21,31 @@ public:
     void createTree();
     void PreOrder(Node *p);
     void IPreOrder();
+    void InOrder();
     Node *getRoot() { return root; }
 };
+
+void Iterative::InOrder()
+{
+    stack<Node *> stk;
+    Node *p = root;
+
+    while (p != NULL || !stk.empty())
+    {
+        if (p != NULL)
+        {
+            stk.emplace(p);
+            p = p->Lchild;
+        }
+        else
+        {
+            p = stk.top();
+            stk.pop();
+            cout << p->data << " ";
+            p = p->Rchild;
+        }
+    }
+}
 
 void Iterative::IPreOrder()
 {
@@ -105,4 +128,6 @@ int main()
     it.PreOrder(p);
     cout << endl;
     it.IPreOrder();
+    cout << endl;
+    it.InOrder();
 }
