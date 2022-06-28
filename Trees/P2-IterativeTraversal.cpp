@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <stack>
+#include <cstdint>
 using namespace std;
 
 class Node
@@ -22,8 +23,39 @@ public:
     void PreOrder(Node *p);
     void IPreOrder();
     void InOrder();
+    void IPostOrder();
     Node *getRoot() { return root; }
 };
+
+void Iterative::IPostOrder()
+{
+    Node *p = root;
+    stack<intptr_t> st;
+    intptr_t temp;
+    while (p != NULL || !st.empty())
+    {
+        if (p != NULL)
+        {
+            st.emplace((intptr_t)p);
+            p = p->Lchild;
+        }
+        else
+        {
+            temp = st.top();
+            st.pop();
+            if (temp > 0)
+            {
+                st.emplace(-temp);
+                p = ((Node *)temp)->Rchild;
+            }
+            else
+            {
+                cout << ((Node *)(-1 * temp))->data << " ";
+                p = NULL;
+            }
+        }
+    }
+}
 
 void Iterative::InOrder()
 {
@@ -130,4 +162,6 @@ int main()
     it.IPreOrder();
     cout << endl;
     it.InOrder();
+    cout << endl;
+    it.IPostOrder();
 }
