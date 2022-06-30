@@ -22,7 +22,23 @@ public:
     void PostOrder();
     int count(Node *p);
     Node *getRoot() { return root; }
+    int height(Node *p);
 };
+
+int Tree::height(Node *p)
+{
+    int left, right;
+    if (p != NULL)
+    {
+        left = height(p->Lchild);
+        right = height(p->Rchild);
+        if (left > right)
+            return left + 1;
+        else
+            return right + 1;
+    }
+    return 0;
+}
 
 int Tree::count(Node *p)
 {
@@ -119,5 +135,6 @@ int main()
     T.PostOrder();
     Node *root = T.getRoot();
     cout << endl;
-    cout << "Number of node in this tree is " << T.count(root);
+    cout << "Number of node in this tree is " << T.count(root) << endl;
+    cout << "Height of Tree is " << T.height(root) << endl;
 }
