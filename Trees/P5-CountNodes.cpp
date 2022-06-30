@@ -23,7 +23,40 @@ public:
     int count(Node *p);
     Node *getRoot() { return root; }
     int height(Node *p);
+    int sum(Node *p);
+    int deg2count(Node *p);
 };
+
+int Tree::deg2count(Node *p)
+{
+    int x, y;
+    if (p)
+    {
+        x = deg2count(p->Lchild);
+        y = deg2count(p->Rchild);
+        if (p->Lchild && p->Rchild)
+        {
+            return x + y + 1;
+        }
+        else
+        {
+            return x + y;
+        }
+    }
+    return 0;
+}
+
+int Tree::sum(Node *p)
+{
+    int x, y;
+    if (p)
+    {
+        x = sum(p->Lchild);
+        y = sum(p->Rchild);
+        return x + y + p->data;
+    }
+    return 0;
+}
 
 int Tree::height(Node *p)
 {
@@ -137,4 +170,5 @@ int main()
     cout << endl;
     cout << "Number of node in this tree is " << T.count(root) << endl;
     cout << "Height of Tree is " << T.height(root) << endl;
+    cout << "Sum of tree is " << T.sum(root) << endl;
 }
