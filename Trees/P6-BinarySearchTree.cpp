@@ -22,6 +22,29 @@ public:
     void Inorder();
 };
 
+Node *BST::search(int value)
+{
+    Node *p = root;
+
+    while (p != NULL)
+    {
+        if (p->data == value)
+        {
+            return p;
+        }
+        else if (value < p->data)
+        {
+            p = p->Lchild;
+        }
+        else if (value > p->data)
+        {
+            p = p->Rchild;
+        }
+    }
+
+    return NULL;
+}
+
 void BST::insert(int key)
 {
     Node *p, *r;
@@ -91,9 +114,24 @@ int main()
     t.insert(20);
     t.insert(9);
     t.insert(11);
+    t.insert(55);
+    t.insert(23);
+    t.insert(111);
     t.insert(64);
     t.insert(12);
     t.insert(15);
 
     t.Inorder();
+
+    Node *search = t.search(12);
+    if (search != NULL)
+    {
+        cout << endl
+             << search->data << " Exist at " << search;
+    }
+    else
+    {
+        cout << endl
+             << "Not found";
+    }
 }
