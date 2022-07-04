@@ -20,7 +20,44 @@ public:
     void insert(int key);
     Node *search(int value);
     void Inorder();
+    Node *Rinsert(Node *p, int key);
+    void RInorder(Node *p);
+    Node *GetRoot() { return root; }
+    void SetRoot(Node *p) { root = p; }
 };
+
+void BST::RInorder(Node *p)
+{
+    if (p)
+    {
+        RInorder(p->Lchild);
+        cout << p->data << " ";
+        RInorder(p->Rchild);
+    }
+}
+
+Node *BST::Rinsert(Node *p, int key)
+{
+    Node *t;
+    if (p == NULL)
+    {
+        t = new Node;
+        t->data = key;
+        t->Lchild = NULL;
+        t->Rchild = NULL;
+        return t;
+    }
+    if (key < p->data)
+    {
+
+        p->Lchild = Rinsert(p->Lchild, key);
+    }
+    else if (key > p->data)
+    {
+        p->Rchild = Rinsert(p->Rchild, key);
+    }
+    return p;
+}
 
 Node *BST::search(int value)
 {
@@ -111,17 +148,15 @@ void BST::Inorder()
 int main()
 {
     BST t;
-    t.insert(20);
-    t.insert(9);
-    t.insert(11);
-    t.insert(55);
-    t.insert(23);
-    t.insert(111);
-    t.insert(64);
-    t.insert(12);
-    t.insert(15);
+    Node *root = t.Rinsert(t.GetRoot(), 26);
+    t.SetRoot(root);
+    t.Rinsert(t.GetRoot(), 21);
+    t.Rinsert(t.GetRoot(), 11);
+    t.Rinsert(t.GetRoot(), 19);
+    t.Rinsert(t.GetRoot(), 30);
+    t.Rinsert(t.GetRoot(), 15);
 
-    t.Inorder();
+    t.RInorder(root);
 
     Node *search = t.search(12);
     if (search != NULL)
