@@ -22,6 +22,8 @@ public:
     int BalanceFactor(Node *p);
     Node *LLRotation(Node *p);
     Node *RRRotation(Node *p);
+    Node *LRRotation(Node *p);
+    Node *RLRotation(Node *p);
 };
 
 int AVLRotations::BalanceFactor(Node *p)
@@ -31,6 +33,54 @@ int AVLRotations::BalanceFactor(Node *p)
     hl = p && p->Rchild ? p->Rchild->height : 0;
 
     return hl - hr;
+}
+
+Node *AVLRotations::LRRotation(Node *p)
+{
+    Node *pl = p->Lchild;
+    Node *plr = pl->Rchild;
+
+    // Rotation
+    pl->Rchild = plr->Lchild;
+    plr->Lchild = pl;
+    p->Lchild = plr->Rchild;
+    plr->Rchild = p;
+
+    // Update Height
+    p->height = NodeHeight(p);
+    plr->height = NodeHeight(plr);
+    pl->height = NodeHeight(pl);
+
+    // Check if the value entered is root
+    if (p == root)
+    {
+        root = plr;
+    }
+
+    return plr;
+}
+
+Node *AVLRotations::RLRotation(Node *p)
+{
+    Node *pr = p->Rchild;
+    Node *prl = pr->Lchild;
+
+    pr = prl->Rchild;
+    prl->Rchild = pr;
+
+    p->Rchild = prl->Lchild;
+    prl->Lchild = p;
+
+    p->height = NodeHeight(p);
+    pr->height = NodeHeight(pr);
+    prl->height = NodeHeight(prl);
+
+    if (p == root)
+    {
+        root = prl;
+    }
+
+    return prl;
 }
 
 Node *AVLRotations::RRRotation(Node *p)
@@ -111,9 +161,17 @@ Node *AVLRotations::Insert(Node *p, int key)
     {
         return LLRotation(p);
     }
-    if (BalanceFactor(p) == 2 && BalanceFactor(p->Rchild) == -1)
+    else if (BalanceFactor(p) == -2 && BalanceFactor(p->Rchild) == -1)
     {
         return RRRotation(p);
+    }
+    else if (BalanceFactor(p) == 2 && BalanceFactor(p->Lchild) == -1)
+    {
+        return LRRotation(p);
+    }
+    else if (BalanceFactor(p) == -2 && BalanceFactor(p->Rchild) == 1)
+    {
+        return RLRotation(p);
     }
 
     return p;
