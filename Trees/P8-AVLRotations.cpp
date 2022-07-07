@@ -24,13 +24,25 @@ public:
     Node *RRRotation(Node *p);
     Node *LRRotation(Node *p);
     Node *RLRotation(Node *p);
+    void PreOrder(Node *p);
+    Node *GetRoot() { return root; }
 };
+
+void AVLRotations::PreOrder(Node *p)
+{
+    if (p)
+    {
+        cout << p->data << " ";
+        PreOrder(p->Lchild);
+        PreOrder(p->Rchild);
+    }
+}
 
 int AVLRotations::BalanceFactor(Node *p)
 {
     int hl, hr;
     hl = p && p->Lchild ? p->Lchild->height : 0;
-    hl = p && p->Rchild ? p->Rchild->height : 0;
+    hr = p && p->Rchild ? p->Rchild->height : 0;
 
     return hl - hr;
 }
@@ -65,7 +77,7 @@ Node *AVLRotations::RLRotation(Node *p)
     Node *pr = p->Rchild;
     Node *prl = pr->Lchild;
 
-    pr = prl->Rchild;
+    pr->Lchild = prl->Rchild;
     prl->Rchild = pr;
 
     p->Rchild = prl->Lchild;
@@ -116,7 +128,7 @@ Node *AVLRotations::LLRotation(Node *p)
     p->height = NodeHeight(p);
     pl->height = NodeHeight(pl);
 
-    if (root = p)
+    if (p == root)
     {
         root = pl;
     }
@@ -143,6 +155,10 @@ Node *AVLRotations::Insert(Node *p, int key)
         t->data = key;
         t->height = 1;
         t->Lchild = t->Rchild = NULL;
+        if (root == NULL)
+        {
+            root = t;
+        }
         return t;
     }
 
@@ -150,7 +166,7 @@ Node *AVLRotations::Insert(Node *p, int key)
     {
         p->Lchild = Insert(p->Lchild, key);
     }
-    else
+    else if (key > p->data)
     {
         p->Rchild = Insert(p->Rchild, key);
     }
@@ -175,4 +191,21 @@ Node *AVLRotations::Insert(Node *p, int key)
     }
 
     return p;
+}
+
+int main()
+{
+    AVLRotations AV;
+
+    AV.Insert(AV.GetRoot(), 10);
+    AV.Insert(AV.GetRoot(), 20);
+    AV.Insert(AV.GetRoot(), 30);
+    AV.Insert(AV.GetRoot(), 25);
+    AV.Insert(AV.GetRoot(), 28);
+    AV.Insert(AV.GetRoot(), 27);
+    AV.Insert(AV.GetRoot(), 5);
+    AV.Insert(AV.GetRoot(), 15);
+    AV.Insert(AV.GetRoot(), 19);
+
+    AV.PreOrder(AV.GetRoot());
 }
