@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class Heap
@@ -34,7 +33,7 @@ void Heap::Delete()
         int leftIndex = 2 * i;
         int rightIndex = 2 * i + 1;
 
-        if (leftIndex < size && arr[i] < arr[leftIndex])
+        if (leftIndex < size && (arr[i] < arr[leftIndex] && arr[leftIndex] > arr[rightIndex]))
         {
             swap(arr[i], arr[leftIndex]);
             i = leftIndex;
@@ -83,13 +82,12 @@ void Heap::insert(int key)
 int main()
 {
     Heap h;
-    h.insert(20);
-    h.insert(25);
-    h.insert(30);
-    h.insert(32);
-    h.insert(15);
-    h.insert(19);
-    h.insert(28);
+
+    int A[] = {-1, 66, 68, 60, 55, 56, 90, 49};
+    for (int i = 1; i < sizeof(A) / sizeof(A[0]); i++)
+    {
+        h.insert(A[i]);
+    }
 
     h.print();
 
@@ -97,6 +95,6 @@ int main()
          << "After delete" << endl;
 
     h.Delete();
-    h.Delete();
+
     h.print();
 }
