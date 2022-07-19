@@ -8,7 +8,7 @@ class Heap
 public:
     Heap(int size) { this->size = size; };
     void heapify(int A[], int n);
-    void print(int A[]);
+    void print(int A[], int n);
     void Delete(int A[], int n);
 };
 
@@ -48,17 +48,18 @@ void Heap::Delete(int A[], int n)
 void Heap::heapify(int A[], int n)
 {
 
-    for (int i = n / 2; i > 0; i--)
+    for (int i = (n / 2); i > 0; i--)
     {
+
         int leftChild = 2 * i;
         int largest = leftChild;
-        int rightChild = 2 * i + 1;
 
         while (largest < n)
         {
             // compare left and right child of current i and point largest
+            int rightChild = 2 * i + 1;
 
-            if (A[leftChild] < A[rightChild])
+            if (A[largest] < A[rightChild])
             {
                 largest = rightChild;
             }
@@ -78,9 +79,9 @@ void Heap::heapify(int A[], int n)
     }
 }
 
-void Heap::print(int A[])
+void Heap::print(int A[], int n)
 {
-    for (int i = 1; i < size; i++)
+    for (int i = 1; i < n; i++)
     {
         cout << A[i] << " ";
     }
@@ -89,13 +90,12 @@ void Heap::print(int A[])
 int main()
 {
 
-    int arr[] = {-1, 70, 68, 60, 55, 56, 90, 49};
+    int arr[] = {-1, 70, 68, 60, 73, 56, 90, 49};
     Heap h(sizeof(arr) / sizeof(arr[0]));
-    h.heapify(arr, sizeof(arr) / sizeof(arr[0]));
-    h.print(arr);
+    h.heapify(arr, (sizeof(arr) / sizeof(arr[0])) - 1);
+    h.print(arr, sizeof(arr) / sizeof(arr[0]));
     h.Delete(arr, sizeof(arr) / sizeof(arr[0]));
     cout << endl
          << "After Delete " << endl;
-
-    h.print(arr);
+    h.print(arr, sizeof(arr) / sizeof(arr[0]));
 }
