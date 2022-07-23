@@ -5,6 +5,8 @@ int partition(int A[], int l, int h)
 {
     int pivot = A[l];
     int count = 0;
+
+    // finding the Pivot point by seeing how much smaller values are present in array
     for (int i = l + 1; i <= h; i++)
     {
         if (A[i] <= pivot)
@@ -13,9 +15,12 @@ int partition(int A[], int l, int h)
         }
     }
 
+    // moving pivot to correct index
+
     int pivotIndex = l + count;
     swap(A[l], A[pivotIndex]);
 
+    // Shifting Elements
     int i = l;
     int j = h;
 
