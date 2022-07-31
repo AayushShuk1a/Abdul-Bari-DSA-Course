@@ -15,7 +15,7 @@ int getMax(int A[], int n)
     return max;
 }
 
-void CountingSort(int A[], int n, int pass)
+void CountSort(int A[], int n, int pass)
 {
     int count[10] = {0};
     int output[n];
@@ -25,9 +25,9 @@ void CountingSort(int A[], int n, int pass)
         count[(A[i] / pass) % 10]++;
     }
 
-    for (int i = 1; i < 10; i++)
+    for (int i = 1; i < n; i++)
     {
-        count[i] = count[i] + count[i - 1];
+        count[i] += count[i - 1];
     }
 
     for (int i = n - 1; i >= 0; i--)
@@ -45,9 +45,10 @@ void CountingSort(int A[], int n, int pass)
 void RadixSort(int A[], int n)
 {
     int max = getMax(A, n);
+
     for (int i = 1; max / i > 0; i *= 10)
     {
-        CountingSort(A, n, i);
+        CountSort(A, n, i);
     }
 }
 
@@ -61,7 +62,7 @@ void print(int A[], int n)
 
 int main()
 {
-    int A[] = {10, 97, 74, 52, 3, 15, 181, 229, 133, 2, 41};
+    int A[] = {1033, 93, 97, 54, 33, 155, 138, 221, 1324, 22, 4};
 
     RadixSort(A, sizeof(A) / sizeof(A[0]));
     print(A, sizeof(A) / sizeof(A[0]));
