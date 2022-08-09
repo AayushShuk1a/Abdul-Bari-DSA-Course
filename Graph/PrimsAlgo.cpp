@@ -76,7 +76,7 @@ void PrimAlgo(int A[8][8], int n)
 
     for (int i = 0; i < 8 - 2; i++)
     {
-        cout << "(" << track[0][i] << "," << track[1][i] << ")";
+        cout << "(" << track[0][i] << "," << track[1][i] << ")" << endl;
     }
 }
 
